@@ -39,3 +39,35 @@ function setButtonText(heart, button) {
     );
   }
 }
+
+// --- ЛОГИКА ДЛЯ МОДАЛЬНОГО ОКНА ---
+
+const dialog = document.querySelector('.dialog');
+const openDialogBtn = document.querySelector('.save-button');
+const closeDialogBtn = document.querySelector('.dialog__button');
+
+if (openDialogBtn && dialog) {
+  openDialogBtn.addEventListener('click', () => {
+    dialog.showModal();
+  });
+}
+
+if (closeDialogBtn && dialog) {
+  closeDialogBtn.addEventListener('click', () => {
+    dialog.close();
+  });
+}
+
+if (dialog) {
+  dialog.addEventListener('click', (e) => {
+    const dialogDimensions = dialog.getBoundingClientRect();
+    if (
+      e.clientX < dialogDimensions.left ||
+      e.clientX > dialogDimensions.right ||
+      e.clientY < dialogDimensions.top ||
+      e.clientY > dialogDimensions.bottom
+    ) {
+      dialog.close();
+    }
+  });
+}
